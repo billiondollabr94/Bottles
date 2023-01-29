@@ -348,7 +348,7 @@ class Bottles(Adw.Application):
             if response != Gtk.ResponseType.ACCEPT:
                 return
 
-            def finish(result, error=False):
+            def finish(_widget, result, error=False):
                 if result.status:
                     self.win.show_toast(_("Configuration imported successfully"))
                 else:
@@ -388,7 +388,7 @@ class Bottles(Adw.Application):
             if response != Gtk.ResponseType.ACCEPT:
                 return
 
-            def finish(result, error=False):
+            def finish(_widget, result, error=False):
                 if result.status:
                     self.win.show_toast(_("Backup restored successfully"))
                 else:
@@ -397,7 +397,7 @@ class Bottles(Adw.Application):
             self.win.show_toast(_("Importing backup…"))
             RunAsync(
                 task_func=BackupManager.import_backup,
-                callback=self.finish,
+                callback=finish,
                 window=self.win,
                 scope="full",
                 path=dialog.get_file().get_path(),
